@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  width: 100%;
+  font-family: sans-serif;
+  background-color: rgb(150, 150, 150);
+}
+h1{
+  display: inline-block;
+}
+h2,p{
+    text-align: center;
+}
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.card{
+    z-index: 1;
+    background-color: rgb(173, 186, 224);
+    border-radius: 10px;
+    width: 23%;
+    min-width: 300px;
+    height: 60%;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
+.big-icon{
+  height: 60%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon{
+  font-size: 8rem;
+  animation-name: sun;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+  animation-duration: 1.5s;
+}
+.fa-sun{
+  color: rgb(255, 204, 0);
+}
+.fa-cloud{
+    color: rgb(94, 94, 94);
+}
+.fa-cloud-rain{
+    color: #1b80fcc8;
+}
+.details{
+  z-index: 999;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.city{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.date{
+  opacity: .6;
+  text-transform: uppercase;
+}
+.fa-location-dot{
+  font-size: 1.8rem;
+  margin-right: 10px;
+}
+.temp h2{
+  font-size: 1.7rem;
+}
+.min-max{
+  opacity: .6;
+}
+.rotate1, .rotate2, .rotate3{
+  position: absolute;
+}
+.rotate1{
+  z-index: -1;
+  width: 800px;
+  height: 690px;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  background-color: rgba(255, 255, 255, 0.267);
+  clip-path: ellipse(36% 40% at 50% 50%);
+  animation-name: rotate;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.rotate2{
+  z-index: -1;
+  width: 800px;
+  height: 690px;
+  top: 38%;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  background-color: rgba(255, 255, 255, 0.575);
+  clip-path: ellipse(36% 40% at 50% 50%);
+  animation-name: rotate;
+  animation-duration: 1.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.rotate3{
+  z-index: -1;
+  width: 800px;
+  height: 690px;
+  top: 41%;
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg);
+  background-color: rgba(255, 255, 255, 0.83);
+  clip-path: ellipse(36% 40% at 50% 50%);
+  animation-name: rotate;
+  animation-duration: 2.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotate {
+  to{
+    transform: translateX(-50%) rotate(-360deg);
+  }
+}
+@keyframes sun{
+  0%{
+    scale: 1;
+  }
+  50%{
+    scale: 1.2;
+  }
+  100%{
+    scale: 1;
+  }
+}
+
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="card">
+            <div class="big-icon">
+                <i class="fa-solid fa-<%= locals.weather %> icon"></i>
+            </div>
+            <div class="details">
+                <div class="city">
+                        <h1>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <%= locals.location %> , <%= locals.country %>
+                        </h1>
+                    <p class="date">WED | OCT 23 | 10:49AM</p>
+                </div>
+                <div class="temp">
+                    <h2 class="temperature"> <%= locals.temperature %>&degC </h2>
+                    <p class="min-max"><span class="min">Min:<%= locals.tempmin %>&degC</span> | <span class="max">Max:<%= locals.tempmax %>&degC</span></p>
+                 </div>
+            </div>
+
+            <div class="rotate1 circles"></div>
+            <div class="rotate2 circles"></div>
+            <div class="rotate3 circles"></div>
+        </div>
+    </main>
+    <script>
+        const CurrentDate = document.querySelector(".date");
+let weatherIcon = document.getElementsByClassName("icon");
+
+let tempStatus = "Clouds"
+
+let d = new Date();
+let weekDay = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+let currentDay = weekDay[d.getDay()];
+
+
+const getCurrentTime = () => {
+    var months = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "June",
+        "July",
+        "Aug",
+        "Sept",
+        "Oct",
+        "Nov",
+        "Dex"
+    ]
+
+    var currentTime =   new Date ();
+    var month = months[currentTime.getMonth()];
+    var day = currentTime.getDate();
+
+    var hours = currentTime.getHours();
+    var minutes = currentTime.getMinutes();
+
+    var meridians = "AM";
+
+    if(hours > 11){
+        meridians = "PM";
+        if (hours > 12) hours -= 12; 
+    }
+
+    if(minutes < 10){
+        minutes = "0" + minutes; 
+    }
+
+    return `${currentDay} | ${month} 23 | ${hours}:${minutes}${meridians}`;
+}
+
+CurrentDate.innerHTML = getCurrentTime();
+
+
+    </script>
+</body>
+</html>

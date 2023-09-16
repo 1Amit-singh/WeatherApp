@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <style>
+        body{
+            background-color: rgb(150, 150, 150);
+        }
+        .form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 70px;
+    gap: 20px;
+}
+.form input[type="text"]{
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    outline: none;
+    border: none;
+}
+.form input[type="submit"]{
+    padding: 10px 10px;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    background-color: #1b80fcc8;
+    color: #fff;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <form action="/weather" class="form" method="get">
+            <input type="text" placeholder="City name" name="city" value="Pune" />
+            <input type="submit" value="Submit">
+        </form>
+    </header>
+</body>
+</html>
