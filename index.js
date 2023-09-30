@@ -43,7 +43,7 @@ app.get("/weather",async (req, res) => {
     else {
         weather = "sun";
     }
-    res.render("views/index.ejs", { temperature: apiData.main.temp, tempmin: apiData.main.temp_min, tempmax: apiData.main.temp_max, location: apiData.name, country: apiData.sys.country, weather: weather });
+    res.render(`${__dirname}/views/index.ejs`, { temperature: apiData.main.temp, tempmin: apiData.main.temp_min, tempmax: apiData.main.temp_max, location: apiData.name, country: apiData.sys.country, weather: weather });
 
     }    
     catch{
